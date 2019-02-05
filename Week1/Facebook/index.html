@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>
-      Facebook &mdash; Выполните вход или зарегистрируйтесь
+      Facebook - Log In or Sign Up
     </title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/480px-F_icon.svg.png">
+    <link href="./style.css" type="text/css" rel="stylesheet">
   </head>
+
   <body>
-    <header>
+
+    <div class="header">
+
+      <img src="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19764.png" alt="Facebook logo">
       
-    </header>
+      <div class="inputs">
+        <form>
+          <label for="login">Email or Phone</label>
+          <br>
+          <input type="text" name="login" id="login">
+        </form>
+        <form>
+          <label for="password">Password</label>
+          <br>
+          <input type="password" name="password" id="password">
+        </form>
+        <form>
+          <input id="submit" type="submit" value="Log In">
+        </form>
+      </div>
+    </div>
+    <a id="forget" href="https://www.facebook.com/login/identify/?ctx=recover&ars=royal_blue_bar">Forgot account?</a>
+
+    <h1 id="connect">Connect with friends and the<br>
+      world around you on Facebook.</h1>
+
+    <div class="info">
+
+      <div class="moreinfo">
+        <img src="https://i.ibb.co/gSbhWd5/1.jpg" alt="some image">
+        <h3 style="color: #666; margin-left: 2px">from friends in News Feed.</h3>
+        <h3 style="color: #333; margin-right: 2px"><strong>See photos and updates</strong></h3>
+      </div>
+      <div class="moreinfo">
+        <img src="https://i.ibb.co/r3TL2RM/2.jpg" alt="another image">
+        <h3 style="color: #666; margin-left: 2px">in your life on your Timeline.</h3>
+        <h3 style="color: #333; margin-right: 2px"><strong>Share what's new</strong></h3>
+      </div>
+      <div class="moreinfo">
+          <img src="https://i.ibb.co/VTVyN0q/3.jpg" alt="the last one">
+          <h3 style="color: #666; margin-left: 2px">of what you're looking for with Facebook Search.</h3>
+          <h3 style="color: #333; margin-right: 2px"><strong>Find more</strong></h3>
+        </div>
+    </div>
+
   </body>
+
 </html>
