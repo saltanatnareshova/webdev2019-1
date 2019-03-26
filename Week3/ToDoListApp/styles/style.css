@@ -47,6 +47,7 @@ h2 {
   color: white;
   border: #24292d;
   font-weight: bold;
+  border-radius: 5px;
 }
 
 #button:hover {
