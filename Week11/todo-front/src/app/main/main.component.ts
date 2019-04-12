@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from '../shared/services/provider.service';
-import { ITaskList } from '../shared/models/models';
+import { ITaskList, ITask } from '../shared/models/models';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +10,7 @@ import { ITaskList } from '../shared/models/models';
 export class MainComponent implements OnInit {
 
   public taskLists: ITaskList[] = [];
+  public tasks: ITask[] = [];
 
   constructor(private provider: ProviderService) { }
 
@@ -19,4 +20,9 @@ export class MainComponent implements OnInit {
     });
   }
 
+  getTasks(taskList: ITaskList) {
+    this.provider.getTasks(taskList).then(res => {
+      this.tasks = res;
+    });
+  }
 }
