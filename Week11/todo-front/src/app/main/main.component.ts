@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
 
   public taskLists: ITaskList[] = [];
   public tasks: ITask[] = [];
+  public showTasks = false;
 
   constructor(private provider: ProviderService) { }
 
@@ -23,6 +24,7 @@ export class MainComponent implements OnInit {
   getTasks(taskList: ITaskList) {
     this.provider.getTasks(taskList).then(res => {
       this.tasks = res;
+      this.showTasks = true;
     });
   }
 }
