@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class TaskList(models.Model):
     name = models.CharField(max_length=200)
 
@@ -12,9 +13,10 @@ class TaskList(models.Model):
             'name': self.name
         }
 
+
 class Task(models.Model):
     name = models.CharField(max_length=200)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     due_on = models.DateTimeField()
     status = models.CharField(max_length=40)
     task_list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
@@ -26,8 +28,8 @@ class Task(models.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'created_at': self.created_at,
-            'due_on': self.due_on,
+            'created_at': self.created_at.strftime('%d.%m.%Y %H:%M'),
+            'due_on': self.due_on.strftime('%d.%m.%Y %H:%M'),
             'status': self.status,
             'task_list': self.task_list.name
         }
