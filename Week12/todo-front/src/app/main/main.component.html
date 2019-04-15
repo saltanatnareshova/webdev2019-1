@@ -1,0 +1,19 @@
+<div class="box">
+  <h1>ToDo List</h1>
+
+  <hr>
+
+  <div class="list_item" *ngFor="let list of taskLists" (click)="getTasks(list)">
+    <h2>&#8226; {{list.name}}</h2>
+  </div>
+
+  <hr id="second">
+
+  <div class="tasks">
+    <div class="task_item" *ngFor="let task of tasks">
+      <h4>{{task.name}}</h4>
+      <p><strong>Status: </strong>{{task.status}} | <strong>DL: </strong>{{task.due_on}}</p>
+    </div>
+  </div>
+
+</div>
