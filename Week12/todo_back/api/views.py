@@ -1,31 +1,61 @@
+from api.serializers import TaskListSerializer, TaskSerializer
+from api import models
+
+from django.views import View
 from django.http import JsonResponse
-from api.models import TaskList, Task
+
 from django.shortcuts import get_object_or_404
+import json
 
 
-def task_lists(request):
-    task_lists = TaskList.objects.all()
-    json_task_lists = [tl.to_json() for tl in task_lists]
-    return JsonResponse(json_task_lists, safe=False)
+class TaskLists(View):
+    def get(self, request):
+        task_lists = models.TaskList.objects.all()
+        serializer = TaskListSerializer(task_lists, many=True)
+        return JsonResponse(serializer.data, safe=False, status=200)
+
+    def post(self, request):
+        data = json.loads(request.body)
+        serializer = TaskListSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors)
 
 
-def task_list(request, pkey):
-    # try:
-    #     task_list = TaskList.objects.get(id=pk)
-    # except TaskList.DoesNotExist as e:
-    #     return JsonResponse({'error': str(e)})
+class TaskList(View):
+    def get(self, request, pk):
+        task_list = get_object_or_404(models.TaskList, pk=pk)
+        serializer = TaskListSerializer(task_list)
+        return JsonResponse(serializer.data, status=200)
 
-    task_list = get_object_or_404(TaskList, pk=pkey)
-    return JsonResponse(task_list.to_json())
+    def put(self, request, pk):
+        task_list = get_object_or_404(models.TaskList, pk=pk)
+        data = json.loads(request.body)
+        serializer = TaskListSerializer(instance=task_list, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors)
+
+    def delete(self, request, pk):
+        task_list = get_object_or_404(models.TaskList, pk=pk)
+        task_list.delete()
+        return JsonResponse({})
 
 
-def tasks(request, pkey):
-    # try:
-    #     task_list = TaskList.objects.get(id=pk)
-    # except TaskList.DoesNotExist as e:
-    #     return JsonResponse({'error': str(e)})
+class Tasks(View):
+    def get(self, request, pk):
+        task_list = get_object_or_404(models.TaskList, pk=pk)
+        tasks = task_list.task_set.all()
+        serializer = TaskSerializer(tasks, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-    task_list = get_object_or_404(TaskList, pk=pkey)
-    tasks = task_list.task_set.all()
-    json_tasks = [task.to_json() for task in tasks]
-    return JsonResponse(json_tasks, safe=False)
+    def post(self, request, pk):
+        data = json.loads(request.body)
+        data['task_list'] = pk
+        serializer = TaskSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors)
