@@ -18,7 +18,7 @@ class Task(models.Model):
     name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     due_on = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=40)
+    status = models.CharField(max_length=40, default='TODO')
     task_list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -1,10 +1,18 @@
+<div>
+  <input type="text" [(ngModel)] = "name"/>
+  <button (click)="createTaskList()">Create</button>
+</div>
+
 <div class="box">
   <h1>ToDo List</h1>
 
   <hr>
 
   <div class="list_item" *ngFor="let list of taskLists" (click)="getTasks(list)">
-    <h2>&#8226; {{list.name}}</h2>
+    <span><h2>&#8226; {{list.name}}</h2></span>
+    <span><span><input type="text" [(ngModel)]="list.name"/></span></span>
+    <button (click)="editTaskList(list)">Edit</button>
+    <button (click)="deleteTaskList(list)">Delete</button>
   </div>
 
   <hr id="second">
