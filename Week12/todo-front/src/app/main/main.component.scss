@@ -1,29 +1,99 @@
-.box {
+header {
+  width: 100%;
+  height: 10%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  opacity: 0.8;
+}
+
+input[type="text"] {
+
+}
+
+.creator, .adder {
+  position: absolute;
+  width: 100%;
+  top: 12%;
+}
+
+.create, .add {
+  display: inline-block;
+  position: relative;
+  left: 8%;
+  top: 1px;
+  background: none;
+  border: 2px solid rgb(155, 143, 143);
+  width: 60%;
+  padding: 5px 6px;
+  outline: none;
+  color: #BBB;
+  border-radius: 10px;
+  transition: 0.25s;
+  font-size: 16px;
+}
+
+.create:focus, .add:focus, .editor:focus {
+  border: 2px solid rgb(228, 228, 93);
+}
+
+#cr, #ad {
+  display: inline-block;
+  position: relative;
+  height: 34px;
+  width: 70px;
+  left: 10%;
+  border-radius: 8px;
+  border: 2px solid rgb(155, 143, 143);
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#cr:hover, #ad:hover {
+  border: 2px solid rgb(228, 228, 93);
+}
+
+.lists, .tasks {
   height: 75%;
   width: 27%;
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   background-color: black;
-  opacity: 0.95;
+  opacity: 0.8;
   border-radius: 5%;
+}
+
+.lists {
+  left: 35%;
+  top: 54%;
+}
+
+.tasks {
+  left: 65%;
 }
 
 hr {
   width: 90%;
   color: white;
   position: absolute;
-  top: 12%;
+  top: 10%;
   left: 5%;
 }
 
-#second {
-  position: absolute;
-  top: 52%;
+.second {
+  top: 22%;
 }
 
-h1 {
+.tlists, .ttasks {
+  position: absolute;
+  top: 24%;
+  left: 2%;
+  width: 100%;
+}
+
+h1, h2 {
   position: relative;
   margin: 5px 0px;
   color: white;
@@ -31,21 +101,77 @@ h1 {
   font-weight: 400;
 }
 
-h2 {
+h3 {
   color: white;
   font-weight: 400;
+  font-size: 22px;
 }
 
 .list_item {
   position: relative;
-  left: 8%;
+  left: 5%;
   top: 3%;
   margin-top: 8px;
   cursor: pointer;
 }
 
-.list_item:hover {
-  left: 9%;
+h3:hover {
+  margin-left: 5px;
+}
+
+.settings {
+  position: relative;
+  top: 5px;
+  width: 100%;
+}
+
+.editor {
+  display: inline-block;
+  position: relative;
+  background: none;
+  border: 2px solid rgb(155, 143, 143);
+  width: 50%;
+  padding: 5px 6px;
+  outline: none;
+  color: #BBB;
+  border-radius: 10px;
+  transition: 0.25s;
+  font-size: 14px;
+}
+
+.edit {
+  display: inline-block;
+  position: relative;
+}
+
+#changer {
+  height: 34px;
+  width: 50px;
+  left: 1%;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(24, 172, 24);
+  color: white;
+  font-size: 14px;
+}
+
+#changer:hover {
+  background-color: rgb(7, 71, 7);
+}
+
+#deleter {
+  height: 34px;
+  width: 60px;
+  left: 2%;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(236, 32, 32);
+  color: white;
+  font-size: 14px;
+}
+
+#deleter:hover {
+  background-color: rgb(110, 8, 8);
 }
 
 .tasks {

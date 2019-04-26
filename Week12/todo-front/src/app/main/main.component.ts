@@ -9,6 +9,10 @@ import { ITaskList, ITask } from '../shared/models/models';
 })
 export class MainComponent implements OnInit {
 
+  public headTasks = 'Tasks';
+  public currentTaskList = -1;
+  public newTaskName = '';
+
   public taskLists: ITaskList[] = [];
   public tasks: ITask[] = [];
 
@@ -22,9 +26,15 @@ export class MainComponent implements OnInit {
     });
   }
 
+  reset() {
+    this.currentTaskList = -1;
+  }
+
   getTasks(taskList: ITaskList) {
     this.provider.getTasks(taskList).then(res => {
       this.tasks = res;
+      this.headTasks = taskList.name;
+      this.currentTaskList = taskList.id;
     });
   }
 
@@ -49,5 +59,16 @@ export class MainComponent implements OnInit {
         this.taskLists = r;
       });
     });
+  }
+
+
+  // TODO: complete task creation method
+  createTask() {
+    if (this.currentTaskList !== -1 && this.newTaskName !== '') {
+      this.provider.createTask(this.currentTaskList, this.newTaskName).then(res => {
+        this.newTaskName = '';
+
+      });
+    }
   }
 }

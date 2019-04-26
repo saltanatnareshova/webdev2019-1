@@ -1,23 +1,45 @@
-<div>
-  <input type="text" [(ngModel)] = "name"/>
-  <button (click)="createTaskList()">Create</button>
-</div>
-
-<div class="box">
+<header>
   <h1>ToDo List</h1>
+</header>
+
+<div class="lists" (click)="reset()">
+  <h2>TaskLists</h2>
 
   <hr>
 
-  <div class="list_item" *ngFor="let list of taskLists" (click)="getTasks(list)">
-    <span><h2>&#8226; {{list.name}}</h2></span>
-    <span><span><input type="text" [(ngModel)]="list.name"/></span></span>
-    <button (click)="editTaskList(list)">Edit</button>
-    <button (click)="deleteTaskList(list)">Delete</button>
+  <div class="creator">
+    <input class="create" type="text" [(ngModel)]="name" placeholder="New tasklist"/>
+    <button id="cr" (click)="createTaskList()">Create</button>
   </div>
 
-  <hr id="second">
+  <hr class="second">
 
-  <div class="tasks">
+  <div class="tlists">
+    <div class="list_item" *ngFor="let list of taskLists">
+      <h3 (click)="getTasks(list)">&#8226; {{list.name}}</h3>
+      <div class="settings" *ngIf="currentTaskList===list.id">
+        <input class="editor" type="text" [(ngModel)]="list.name"/>
+        <button class="edit" id="changer" (click)="editTaskList(list)">Edit</button>
+        <button class="edit" id="deleter" (click)="deleteTaskList(list)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tasks">
+  <h2>{{headTasks}}</h2>
+
+  <hr>
+
+  <div class="adder">
+    <input class="add" type="text" [(ngModel)]="name" placeholder="New task"/>
+    <button id="ad" (click)="createTaskList()">Add</button>
+  </div>
+
+  <hr class="second">
+
+  <div class="ttasks">
     <div class="task_item" *ngFor="let task of tasks">
       <h4>{{task.name}}</h4>
       <p><strong>Status: </strong>{{task.status}} | <strong>DL: </strong>{{task.due_on}}</p>
