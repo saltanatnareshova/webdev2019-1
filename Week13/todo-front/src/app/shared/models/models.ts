@@ -11,3 +11,7 @@ export interface ITask {
   status: string;
   task_list: string;
 }
+
+export interface IAuthResponse {
+  token: string;
+}

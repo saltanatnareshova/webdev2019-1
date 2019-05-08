@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MainService} from './main.service';
 import {HttpClient} from '@angular/common/http';
-import { ITaskList, ITask } from '../models/models';
+import { ITaskList, ITask, IAuthResponse } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +42,14 @@ export class ProviderService extends MainService {
     });
   }
 
+  auth(login: string, password: string): Promise<IAuthResponse> {
+    return this.post('http://localhost:8000/api/login', {
+      username: login,
+      password: password
+    });
+  }
+
+  logout(): Promise<any> {
+    return this.post('http://localhost:8000/api/logout', {});
+  }
 }

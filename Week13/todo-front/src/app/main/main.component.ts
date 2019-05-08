@@ -11,23 +11,34 @@ export class MainComponent implements OnInit {
 
   public headTasks = 'Tasks';
   public currentTaskList = -1;
-  public newTaskName = '';
 
   public taskLists: ITaskList[] = [];
   public tasks: ITask[] = [];
 
-  public name: any = '';
+  public taskListName: any = '';
+  public taskName: any = '';
+
+  public isLogged = false;
+
+  public login: any = '';
+  public password: any = '';
 
   constructor(private provider: ProviderService) { }
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.isLogged = true;
+    }
+    if (this.isLogged) {
+      this.getTaskLists();
+    }
+  }
+
+  getTaskLists() {
     this.provider.getTaskLists().then(res => {
       this.taskLists = res;
     });
-  }
-
-  reset() {
-    this.currentTaskList = -1;
   }
 
   getTasks(taskList: ITaskList) {
@@ -39,9 +50,9 @@ export class MainComponent implements OnInit {
   }
 
   createTaskList() {
-    if (this.name !== '') {
-      this.provider.createTaskList(this.name).then(res => {
-        this.name = '';
+    if (this.taskListName !== '') {
+      this.provider.createTaskList(this.taskListName).then(res => {
+        this.taskListName = '';
         this.taskLists.push(res);
       });
     }
@@ -49,7 +60,7 @@ export class MainComponent implements OnInit {
 
   editTaskList(list: ITaskList) {
     this.provider.updateTaskList(list).then(res => {
-
+      this.currentTaskList = -1;
     });
   }
 
@@ -61,14 +72,30 @@ export class MainComponent implements OnInit {
     });
   }
 
-
   // TODO: complete task creation method
   createTask() {
-    if (this.currentTaskList !== -1 && this.newTaskName !== '') {
-      this.provider.createTask(this.currentTaskList, this.newTaskName).then(res => {
-        this.newTaskName = '';
+    if (this.currentTaskList !== -1 && this.taskName !== '') {
+      this.provider.createTask(this.currentTaskList, this.taskName).then(res => {
+        this.taskName = '';
 
       });
     }
+  }
+
+  auth() {
+    if (this.login !== '' && this.password !== '') {
+      this.provider.auth(this.login, this.password).then(res => {
+        localStorage.setItem('token', res.token);
+        this.isLogged = true;
+        this.getTaskLists();
+      });
+    }
+  }
+
+  logout() {
+    this.provider.logout().then(res => {
+      this.isLogged = false;
+      localStorage.clear();
+    });
   }
 }
