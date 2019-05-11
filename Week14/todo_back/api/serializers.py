@@ -13,6 +13,7 @@ class TaskListSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True)
     created_by = UserSerializer(read_only=True)
+    tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     def create(self, validated_data):
         task_list = TaskList(**validated_data)

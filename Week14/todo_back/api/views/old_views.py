@@ -47,7 +47,7 @@ class TaskList(View):
 class Tasks(View):
     def get(self, request, pk):
         task_list = get_object_or_404(models.TaskList, pk=pk)
-        tasks = task_list.task_set.all()
+        tasks = task_list.tasks.all()
         serializer = TaskSerializer(tasks, many=True)
         return JsonResponse(serializer.data, safe=False)
 

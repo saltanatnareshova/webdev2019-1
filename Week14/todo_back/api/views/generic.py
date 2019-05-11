@@ -3,6 +3,7 @@ from api.serializers import TaskListSerializer, TaskSerializer, UserSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 
 class TaskListsView(generics.ListCreateAPIView):
@@ -28,10 +29,5 @@ class TasksView(generics.ListCreateAPIView):
         return Task.objects.filter(task_list=self.kwargs['pk'])
 
     def perform_create(self, serializer):
-        try:
-            task_list = TaskList.objects.get(
-                pk=self.kwargs['pk'])
-        except TaskList.DoesNotExist:
-            raise Http404
-
+        task_list = get_object_or_404(TaskList, id=self.kwargs['pk'])
         serializer.save(task_list=task_list)
