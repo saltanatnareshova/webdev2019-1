@@ -13,43 +13,43 @@ export class ProviderService extends MainService {
   }
 
   getTaskLists(): Promise<ITaskList[]> {
-    return this.get('http://localhost:8000/api/task_lists', {});
+    return this.get('http://localhost:8000/api/task_lists/', {});
   }
 
   getTasks(taskList: ITaskList): Promise<ITask[]> {
-    return this.get(`http://localhost:8000/api/task_lists/${taskList.id}/tasks`, {});
+    return this.get(`http://localhost:8000/api/task_lists/${taskList.id}/tasks/`, {});
   }
 
   createTaskList(name: any): Promise<ITaskList> {
-    return this.post('http://localhost:8000/api/task_lists', {
+    return this.post('http://localhost:8000/api/task_lists/', {
       name: name
     });
   }
 
   updateTaskList(taskList: ITaskList): Promise<ITaskList> {
-    return this.put(`http://localhost:8000/api/task_lists/${taskList.id}`, {
+    return this.put(`http://localhost:8000/api/task_lists/${taskList.id}/`, {
       name: taskList.name
     });
   }
 
   deleteTaskList(id: number): Promise<any> {
-    return this.delet(`http://localhost:8000/api/task_lists/${id}`, {});
+    return this.delet(`http://localhost:8000/api/task_lists/${id}/`, {});
   }
 
   createTask(taskListId: number, name: any): Promise<ITask> {
-    return this.post(`http://localhost:8000/api/task_lists/${taskListId}/tasks`, {
+    return this.post(`http://localhost:8000/api/task_lists/${taskListId}/tasks/`, {
       name: name
     });
   }
 
   auth(login: string, password: string): Promise<IAuthResponse> {
-    return this.post('http://localhost:8000/api/login', {
+    return this.post('http://localhost:8000/api/login/', {
       username: login,
       password: password
     });
   }
 
   logout(): Promise<any> {
-    return this.post('http://localhost:8000/api/logout', {});
+    return this.post('http://localhost:8000/api/logout/', {});
   }
 }
