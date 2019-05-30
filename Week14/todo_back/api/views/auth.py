@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view
 
 
 class UserList(generics.ListAPIView):
@@ -21,7 +22,7 @@ class Login(APIView):
         return Response({'token': token.key})
 
 
-class Logout(APIView):
-    def post(self, request):
-        request.auth.delete()
-        return Response(status=204)
+@api_view(['POST'])
+def logout(request):
+    request.auth.delete()
+    return Response(status=204)

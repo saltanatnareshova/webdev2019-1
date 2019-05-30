@@ -87,7 +87,11 @@ export class MainComponent implements OnInit {
       this.provider.auth(this.login, this.password).then(res => {
         localStorage.setItem('token', res.token);
         this.isLogged = true;
+        this.login = '';
+        this.password = '';
         this.getTaskLists();
+      }).catch(res => {
+        alert('Something went wrong. Please try again');
       });
     }
   }
